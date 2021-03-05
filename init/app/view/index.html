@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sha256加密解密演示</title>
+</head>
+<script src="jquery.js"></script>
+<script>
+function sha256Encryption(){
+    var request=$.ajax({
+        //headers:'csrftoken',
+        url:'http://localhost:7001/sha256Encryption',
+        type:'GET',
+        data:"key="+($('#text').val()),
+        //dataType:"json",
+        contentType: false,
+        processData: false,
+        success:function(data){
+            $('#text').val(data);
+        },
+        error:function(){
+            alert("request error");
+        },
+    });
+}
+function sha256Decryption(){
+    var request=$.ajax({
+        //headers:'csrftoken',
+        url:'http://localhost:7001/sha256Decryption',
+        type:'GET',
+        data:"key="+($('#text').val()),
+        //dataType:"json",
+        contentType: false,
+        processData: false,
+        success:function(data){
+            $('#text').val(data);
+        },
+        error:function(){
+            alert("request error");
+        },
+    });
+}
+</script>
+<body>
+<input id="text" style="border-color: red"/>
+<button onclick="$('#text').val('')">clear</button>
+<button onclick="sha256Encryption()">encryption</button>
+<button onclick="sha256Decryption()">decryption</button>
+</body>
+</html>
