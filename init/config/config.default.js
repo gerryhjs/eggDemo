@@ -16,7 +16,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1614849912173_6065';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ["auth"];
 
   // add your user config here
   const userConfig = {
@@ -32,6 +32,11 @@ module.exports = appInfo => {
     // ]
     // root: workerPath + '/app/view',
   };
+  config.static = {
+    prefix: '/',
+    gzip: true,
+    dir: path.join(appInfo.baseDir, '/app/view'),
+  };
   config.security = {
     xframe: {
       enable: false,
@@ -45,11 +50,7 @@ module.exports = appInfo => {
     origin: '*', // 表示允许的源
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH' // 表示允许的http请求方式
   };
-  config.static = {
-    prefix: '/',
-    gzip: true,
-    dir: path.join(appInfo.baseDir, '/app/view'),
-  };
+
   return {
     ...config,
     ...userConfig,

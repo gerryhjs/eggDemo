@@ -3,6 +3,11 @@
 const Controller = require('egg').Controller;
 const crypto = require('crypto');
 class HomeController extends Controller {
+
+  async PrefixZero(num, n) {
+    return (Array(n).join(0) + num).slice(-n);
+  }
+
   async index() {
     const { ctx } = this;
     await ctx.render('/index.html');
@@ -23,13 +28,14 @@ class HomeController extends Controller {
     const max=9999;
     for (let i=0;i<max;i++)
     {
-      const result = crypto.createHash('sha256').update(i.toString()).digest('hex');
-      console.log("checking:"+i+"/"+max);
+      const str=await this.PrefixZero(i,(max.toString().length));
+      const result = crypto.createHash('sha256').update(str.toString()).digest('hex');
+      console.log("checking:"+str+"/"+max);
       console.log("target="+key);
       console.log("result="+result);
       if (result===key) {
         console.log("find!");
-        ctx.body = i;
+        ctx.body = str;
         return;
       }
     }
