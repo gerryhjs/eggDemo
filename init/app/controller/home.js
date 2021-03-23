@@ -41,6 +41,26 @@ class HomeController extends Controller {
     }
     ctx.body = "unknown";
   }
+
+  async loadBalance() {
+    const { ctx } = this;
+    const redirectIndex = new Date() % 2;
+    // console.log(redirectIndex);
+    switch (redirectIndex) {
+      case 0:
+        ctx.redirect("http://192.168.78.93:7001/sha256Encryption/");
+        break;
+      case 1:
+        ctx.redirect("http://192.168.78.94:7001/sha256Encryption/");
+        break;
+      case 2:
+        ctx.redirect("http://192.168.78.95:7001/sha256Encryption/");
+        break;
+      default:
+        ctx.tatus = 404;
+        break;
+    }
+  }
 }
 
 module.exports = HomeController;

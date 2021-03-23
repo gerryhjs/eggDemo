@@ -8,7 +8,8 @@ module.exports = options => {
         if (
             (operate === '')
             || (operate === 'sha256Encryption')
-            // || (operate === 'sha256Decryption')
+            || (operate === 'sha256Decryption')
+            || (operate === 'loadBalance')
             || (operate === '')
         ) {
             await next();
